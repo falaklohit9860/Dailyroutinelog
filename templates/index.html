@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Routine — Daily Wellness Diary</title>
+
+    <meta name="theme-color" content="#635bff">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="manifest"
+          href="{{ url_for('static', filename='manifest.json') }}">
+
+    <link rel="apple-touch-icon"
+          href="{{ url_for('static', filename='icons/icon-192.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= TOP BAR ================= -->
+
+    <header class="topbar">
+
+        <a href="#diary" class="brand">
+            <span class="brand-logo">✓</span>
+
+            <span class="brand-text">
+                <strong>My Routine</strong>
+                <small>Daily wellness diary</small>
+            </span>
+        </a>
+
+        <div class="header-actions">
+
+            <button
+                class="round-btn"
+                id="todayButton"
+                title="Go to today">
+                🏠
+            </button>
+
+            <button
+                class="round-btn"
+                id="themeButton"
+                title="Toggle dark mode">
+                🌙
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+
+        <!-- =====================================================
+             DIARY PAGE
+        ====================================================== -->
+
+        <section
+            id="diaryPage"
+            class="page-section active-section">
+
+            <!-- HERO -->
+
+            <div class="hero">
+
+                <div class="hero-decoration hero-decoration-one"></div>
+                <div class="hero-decoration hero-decoration-two"></div>
+
+                <div class="hero-content">
+
+                    <div class="hero-top">
+
+                        <div>
+
+                            <span
+                                class="overline"
+                                id="heroDate">
+                                TODAY
+                            </span>
+
+                            <h1 id="greeting">
+                                Good afternoon 👋
+                            </h1>
+
+                            <p>
+                                Build a healthier day, one habit at a time.
+                            </p>
+
+                        </div>
+
+                        <div class="avatar">
+                            U
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-score">
+
+                        <div class="score-content">
+
+                            <span class="score-label">
+                                TODAY'S WELLNESS SCORE
+                            </span>
+
+                            <div class="score-number">
+                                <strong id="progressNumber">0</strong>
+                                <span>%</span>
+                            </div>
+
+                            <p id="progressMessage">
+                                Start logging your day.
+                            </p>
+
+                            <div class="progress-line">
+                                <span id="progressBar"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="progress-ring">
+
+                            <svg viewBox="0 0 100 100">
+
+                                <circle
+                                    class="ring-bg"
+                                    cx="50"
+                                    cy="50"
+                                    r="42">
+                                </circle>
+
+                                <circle
+                                    id="progressArc"
+                                    class="ring-value"
+                                    cx="50"
+                                    cy="50"
+                                    r="42">
+                                </circle>
+
+                            </svg>
+
+                            <div
+                                class="ring-text"
+                                id="progressCircleText">
+                                0%
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK STATS -->
+
+            <div class="quick-grid">
+
+                <div class="quick-card">
+
+                    <div class="quick-icon yellow">
+                        🌅
+                    </div>
+
+                    <div>
+                        <small>Wake up</small>
+                        <strong id="wakePreview">--:--</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-card">
+
+                    <div class="quick-icon blue">
+                        💧
+                    </div>
+
+                    <div>
+                        <small>Water</small>
+                        <strong id="waterPreview">0 L</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-card">
+
+                    <div class="quick-icon green">
+                        🏃
+                    </div>
+
+                    <div>
+                        <small>Exercise</small>
+                        <strong id="exercisePreview">
+                            Not logged
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-card">
+
+                    <div class="quick-icon purple">
+                        😴
+                    </div>
+
+                    <div>
+                        <small>Sleep</small>
+                        <strong id="sleepPreview">--:--</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FEATURE CARDS -->
+
+            <div class="feature-grid">
+
+                <div class="feature-card hydration-card">
+
+                    <div class="feature-top">
+
+                        <h3>💧 Hydration</h3>
+
+                        <strong id="waterPercent">
+                            0%
+                        </strong>
+
+                    </div>
+
+                    <div class="feature-value">
+                        <span id="waterFeatureValue">0</span> L
+                    </div>
+
+                    <div class="feature-muted">
+                        Goal:
+                        <span id="waterGoalLabel">2.5</span> L
+                    </div>
+
+                    <div class="water-progress">
+                        <span id="waterFeatureBar"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-top">
+                        <h3>🔥 Streak</h3>
+                        <span>🏆</span>
+                    </div>
+
+                    <div class="feature-value orange-text">
+                        <span id="streakNumber">0</span>
+                        days
+                    </div>
+
+                    <div class="feature-muted">
+                        Keep your routine going!
+                    </div>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-top">
+                        <h3>🎯 Habits</h3>
+
+                        <span id="habitCount">
+                            0/4
+                        </span>
+                    </div>
+
+                    <div class="habit-row">
+
+                        <span
+                            class="habit"
+                            id="habitExercise">
+                            🏃 Exercise
+                        </span>
+
+                        <span
+                            class="habit"
+                            id="habitMeals">
+                            🍽 Meals
+                        </span>
+
+                        <span
+                            class="habit"
+                            id="habitWater">
+                            💧 Water
+                        </span>
+
+                        <span
+                            class="habit"
+                            id="habitSleep">
+                            😴 Sleep
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DIARY HEADER -->
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span
+                        class="overline dark"
+                        id="diaryOverline">
+                        TODAY
+                    </span>
+
+                    <h2>My daily routine</h2>
+
+                </div>
+
+                <button
+                    class="date-button"
+                    id="openCalendarButton">
+                    📅
+                    <span id="selectedDateLabel">
+                        Today
+                    </span>
+                </button>
+
+            </div>
+
+
+            <!-- CALENDAR -->
+
+            <section
+                class="calendar-card"
+                id="calendarCard">
+
+                <div class="calendar-header">
+
+                    <button
+                        class="calendar-arrow"
+                        id="prevMonth">
+                        ‹
+                    </button>
+
+                    <strong id="calendarMonth">
+                        Month
+                    </strong>
+
+                    <button
+                        class="calendar-arrow"
+                        id="nextMonth">
+                        ›
+                    </button>
+
+                </div>
+
+                <div class="weekdays">
+
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+
+                </div>
+
+                <div
+                    class="calendar-grid"
+                    id="calendarGrid">
+                </div>
+
+            </section>
+
+
+            <!-- MOOD -->
+
+            <div class="mood-card">
+
+                <div class="card-heading">
+
+                    <div class="activity-icon pink">
+                        😊
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            How are you feeling?
+                        </h3>
+
+                        <small>
+                            Track your mood with your daily routine.
+                        </small>
+
+                    </div>
+
+                    <strong
+                        class="selected-mood"
+                        id="selectedMood">
+                        🙂
+                    </strong>
+
+                </div>
+
+
+                <div class="mood-box">
+
+                    <button
+                        class="mood"
+                        data-mood="😄">
+                        😄
+                    </button>
+
+                    <button
+                        class="mood"
+                        data-mood="🙂">
+                        🙂
+                    </button>
+
+                    <button
+                        class="mood"
+                        data-mood="😐">
+                        😐
+                    </button>
+
+                    <button
+                        class="mood"
+                        data-mood="😔">
+                        😔
+                    </button>
+
+                    <button
+                        class="mood"
+                        data-mood="😫">
+                        😫
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TIMELINE -->
+
+            <div class="timeline">
+
+
+                <!-- WAKE -->
+
+                <article class="timeline-item">
+
+                    <time>07:00</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon yellow">
+                                🌅
+                            </div>
+
+                            <div>
+                                <h3>Wake up</h3>
+                                <small>Start of your day</small>
+                            </div>
+
+                        </div>
+
+                        <input
+                            id="wake"
+                            type="time">
+
+                    </div>
+
+                </article>
+
+
+                <!-- BREAKFAST -->
+
+                <article class="timeline-item">
+
+                    <time>08:00</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon orange">
+                                🍳
+                            </div>
+
+                            <div>
+                                <h3>Breakfast</h3>
+                                <small>Morning meal</small>
+                            </div>
+
+                        </div>
+
+                        <textarea
+                            id="breakfast"
+                            placeholder="What did you eat?">
+                        </textarea>
+
+                    </div>
+
+                </article>
+
+
+                <!-- LUNCH -->
+
+                <article class="timeline-item">
+
+                    <time>13:00</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon green">
+                                🍛
+                            </div>
+
+                            <div>
+                                <h3>Lunch</h3>
+                                <small>Midday meal</small>
+                            </div>
+
+                        </div>
+
+                        <textarea
+                            id="lunch"
+                            placeholder="What did you eat?">
+                        </textarea>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SNACK -->
+
+                <article class="timeline-item">
+
+                    <time>16:30</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon purple">
+                                ☕
+                            </div>
+
+                            <div>
+                                <h3>Snack</h3>
+                                <small>Tea, coffee or snacks</small>
+                            </div>
+
+                        </div>
+
+                        <textarea
+                            id="snacks"
+                            placeholder="What did you have?">
+                        </textarea>
+
+                    </div>
+
+                </article>
+
+
+                <!-- EXERCISE -->
+
+                <article class="timeline-item">
+
+                    <time>18:00</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon blue">
+                                🏃
+                            </div>
+
+                            <div>
+                                <h3>Exercise</h3>
+                                <small>Movement & fitness</small>
+                            </div>
+
+                        </div>
+
+                        <input
+                            id="exercise"
+                            type="text"
+                            placeholder="e.g. 30 min walking">
+
+                    </div>
+
+                </article>
+
+
+                <!-- DINNER -->
+
+                <article class="timeline-item">
+
+                    <time>20:30</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon orange">
+                                🍽️
+                            </div>
+
+                            <div>
+                                <h3>Dinner</h3>
+                                <small>Evening meal</small>
+                            </div>
+
+                        </div>
+
+                        <textarea
+                            id="dinner"
+                            placeholder="What did you eat?">
+                        </textarea>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SLEEP -->
+
+                <article class="timeline-item">
+
+                    <time>22:30</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon purple">
+                                😴
+                            </div>
+
+                            <div>
+                                <h3>Sleep</h3>
+                                <small>End of your day</small>
+                            </div>
+
+                        </div>
+
+                        <input
+                            id="sleep"
+                            type="time">
+
+                    </div>
+
+                </article>
+
+
+                <!-- WATER -->
+
+                <article class="timeline-item">
+
+                    <time>All day</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon blue">
+                                💧
+                            </div>
+
+                            <div>
+                                <h3>Water</h3>
+                                <small>Daily hydration</small>
+                            </div>
+
+                        </div>
+
+                        <input
+                            id="water"
+                            type="number"
+                            min="0"
+                            step="0.1"
+                            placeholder="e.g. 2.5">
+
+                    </div>
+
+                </article>
+
+
+                <!-- WORK -->
+
+                <article class="timeline-item">
+
+                    <time>All day</time>
+
+                    <span class="timeline-dot"></span>
+
+                    <div class="routine-card">
+
+                        <div class="card-heading">
+
+                            <div class="activity-icon pink">
+                                📚
+                            </div>
+
+                            <div>
+                                <h3>Work / Study</h3>
+                                <small>Productive time</small>
+                            </div>
+
+                        </div>
+
+                        <textarea
+                            id="work"
+                            placeholder="What did you work or study?">
+                        </textarea>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- DAILY REFLECTION -->
+
+            <div class="notes-card">
+
+                <div class="card-heading">
+
+                    <div class="activity-icon pink">
+                        📝
+                    </div>
+
+                    <div>
+                        <h3>Daily reflection</h3>
+
+                        <small>
+                            Anything important you want to remember?
+                        </small>
+                    </div>
+
+                </div>
+
+                <textarea
+                    id="notes"
+                    placeholder="How was your day? What went well?">
+                </textarea>
+
+            </div>
+
+
+            <!-- SAVE BAR -->
+
+            <div class="save-bar">
+
+                <div class="save-info">
+
+                    <strong id="saveDateText">
+                        Today's diary
+                    </strong>
+
+                    <small>
+                        Your progress is saved to your diary.
+                    </small>
+
+                </div>
+
+                <div class="save-actions">
+
+                    <button
+                        class="clear-button"
+                        id="clearButton">
+                        Clear
+                    </button>
+
+                    <button
+                        class="save-button"
+                        id="saveButton">
+                        Save diary ✓
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             HISTORY PAGE
+        ====================================================== -->
+
+        <section
+            id="historyPage"
+            class="page-section">
+
+            <div class="page-title">
+
+                <span class="overline dark">
+                    YOUR RECORDS
+                </span>
+
+                <h2>Diary history</h2>
+
+                <p>
+                    Review your previous routines and track your consistency.
+                </p>
+
+            </div>
+
+
+            <div class="history-summary">
+
+                <div class="summary-box">
+                    <span>📖</span>
+                    <small>Days logged</small>
+                    <strong id="daysLogged">0</strong>
+                </div>
+
+                <div class="summary-box">
+                    <span>📊</span>
+                    <small>Average progress</small>
+                    <strong id="averageProgress">0%</strong>
+                </div>
+
+                <div class="summary-box">
+                    <span>🏆</span>
+                    <small>Best day</small>
+                    <strong id="bestDay">--</strong>
+                </div>
+
+                <div class="summary-box">
+                    <span>🔥</span>
+                    <small>Current streak</small>
+                    <strong id="historyStreak">0 days</strong>
+                </div>
+
+            </div>
+
+
+            <div class="history-toolbar">
+
+                <input
+                    class="history-search"
+                    id="historySearch"
+                    placeholder="🔎 Search diary by date or content...">
+
+            </div>
+
+
+            <div
+                class="history-list"
+                id="historyList">
+            </div>
+
+
+            <div
+                class="empty-history"
+                id="emptyHistory">
+
+                <div>📅</div>
+
+                <h3>No diary history yet</h3>
+
+                <p>
+                    Save your first diary entry and it will appear here.
+                </p>
+
+                <button
+                    class="primary-small"
+                    id="startToday">
+                    Start today's diary
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             STATS PAGE
+        ====================================================== -->
+
+        <section
+            id="statsPage"
+            class="page-section">
+
+            <div class="page-title">
+
+                <span class="overline dark">
+                    YOUR INSIGHTS
+                </span>
+
+                <h2>Statistics</h2>
+
+                <p>
+                    Understand your routine and improve your consistency.
+                </p>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>📅</span>
+                    <small>Total days</small>
+                    <strong id="statDays">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>🔥</span>
+                    <small>Best progress</small>
+                    <strong id="statBest">0%</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>💧</span>
+                    <small>Total water</small>
+                    <strong id="statWater">0 L</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>🏃</span>
+                    <small>Exercise days</small>
+                    <strong id="statExercise">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="insight-card">
+
+                <h3>
+                    📊 Last 7 days performance
+                </h3>
+
+                <div
+                    class="mini-chart"
+                    id="miniChart">
+                </div>
+
+            </div>
+
+
+            <div class="insight-card">
+
+                <h3>
+                    💡 Routine insights
+                </h3>
+
+                <div
+                    class="habit-row"
+                    id="statsInsights">
+                </div>
+
+            </div>
+
+
+            <div class="settings-card export-card">
+
+                <h3>
+                    📥 Backup your data
+                </h3>
+
+                <p>
+                    Download your diary records as a JSON file.
+                </p>
+
+                <button
+                    class="primary-small"
+                    id="exportButton">
+                    Export my diary
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SETTINGS PAGE
+        ====================================================== -->
+
+        <section
+            id="settingsPage"
+            class="page-section">
+
+            <div class="page-title">
+
+                <span class="overline dark">
+                    PERSONALIZE
+                </span>
+
+                <h2>Settings</h2>
+
+                <p>
+                    Customize your wellness goals.
+                </p>
+
+            </div>
+
+
+            <div class="settings-grid">
+
+
+                <div class="settings-card">
+
+                    <h3>
+                        🎯 Daily goals
+                    </h3>
+
+                    <p>
+                        Set targets for your routine.
+                    </p>
+
+                    <div class="setting-row">
+
+                        <span>
+                            💧 Water goal
+                        </span>
+
+                        <input
+                            id="waterGoalInput"
+                            type="number"
+                            min="0.5"
+                            step="0.1">
+
+                    </div>
+
+                    <div class="setting-row">
+
+                        <span>
+                            🔥 Daily target
+                        </span>
+
+                        <strong>
+                            100%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <h3>
+                        🎨 Appearance
+                    </h3>
+
+                    <p>
+                        Choose how the application looks.
+                    </p>
+
+                    <div class="setting-row">
+
+                        <span>
+                            Dark mode
+                        </span>
+
+                        <button
+                            class="small-action"
+                            id="settingsTheme">
+                            Toggle theme
+                        </button>
+
+                    </div>
+
+                    <div class="setting-row">
+
+                        <span>
+                            Application
+                        </span>
+
+                        <strong>
+                            My Routine
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <h3>
+                        ⚠️ Preferences
+                    </h3>
+
+                    <p>
+                        Reset local application preferences.
+                    </p>
+
+                    <div class="setting-row">
+
+                        <span>
+                            Reset preferences
+                        </span>
+
+                        <button
+                            class="small-action delete"
+                            id="resetPreferences">
+                            Reset
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= BOTTOM NAV ================= -->
+
+    <nav class="bottom-nav">
+
+        <a
+            href="#diary"
+            class="nav-link active"
+            data-page="diary">
+
+            <span>⌂</span>
+            <small>Diary</small>
+
+        </a>
+
+
+        <a
+            href="#history"
+            class="nav-link"
+            data-page="history">
+
+            <span>◷</span>
+            <small>History</small>
+
+        </a>
+
+
+        <a
+            href="#stats"
+            class="nav-link"
+            data-page="stats">
+
+            <span>▥</span>
+            <small>Stats</small>
+
+        </a>
+
+
+        <a
+            href="#settings"
+            class="nav-link"
+            data-page="settings">
+
+            <span>⚙</span>
+            <small>Settings</small>
+
+        </a>
+
+    </nav>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='js/script.js') }}"
+    defer>
+</script>
+
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", function(){
+
+        navigator.serviceWorker
+            .register("/static/sw.js")
+            .catch(function(error){
+                console.log(
+                    "Service worker error:",
+                    error
+                );
+            });
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
