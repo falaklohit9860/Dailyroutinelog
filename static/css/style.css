@@ -2002,3 +2002,101 @@ body.dark .bottom-nav {
         max-width: 100%;
     }
 }
+/* ==========================================
+   FINAL MOBILE TIMELINE WIDTH FIX
+   ========================================== */
+
+@media (max-width: 650px) {
+
+    /* Timeline full available width */
+    .timeline {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    /* Mobile timeline row */
+    .timeline-item {
+        display: grid !important;
+        grid-template-columns: 24px 20px minmax(0, 1fr) !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Actual routine card */
+    .timeline-item .routine-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Card heading */
+    .timeline-item .card-heading {
+        width: 100% !important;
+        min-width: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .timeline-item .card-heading > div {
+        min-width: 0 !important;
+        flex: 1 !important;
+    }
+
+    /* Icon */
+    .timeline-item .activity-icon {
+        flex: 0 0 43px !important;
+        width: 43px !important;
+        height: 43px !important;
+    }
+
+    /* Heading text */
+    .timeline-item .card-heading h3,
+    .timeline-item .card-heading small {
+        overflow-wrap: break-word !important;
+        word-break: normal !important;
+    }
+
+    /* ALL inputs */
+    .timeline-item .routine-card input,
+    .timeline-item .routine-card textarea,
+    .timeline-item .routine-card select {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        margin-top: 14px !important;
+    }
+
+    /* Textareas */
+    .timeline-item .routine-card textarea {
+        min-height: 80px !important;
+        resize: vertical !important;
+    }
+
+    /* Timeline line */
+    .timeline::before {
+        left: 34px !important;
+    }
+
+    /* Remove old mobile margins */
+    .notes-card {
+        margin-left: 44px !important;
+        width: calc(100% - 44px) !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Save row */
+    .save-row {
+        margin-left: 44px !important;
+        width: calc(100% - 44px) !important;
+        box-sizing: border-box !important;
+    }
+}
