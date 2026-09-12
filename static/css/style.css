@@ -1857,3 +1857,86 @@ body.dark .bottom-nav {
     }
 
 }
+/* =========================
+   MOBILE DIARY FORM FIX
+   ========================= */
+
+@media (max-width: 600px) {
+
+  .diary-form,
+  .timeline,
+  .routine-form,
+  .form-grid {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .diary-form *,
+  .timeline *,
+  .routine-form *,
+  .form-grid * {
+    box-sizing: border-box;
+  }
+
+  /* Breakfast / Lunch / Snacks / Dinner cards */
+  .timeline-item,
+  .form-group,
+  .field-group,
+  .routine-item {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Inputs */
+  .diary-form input,
+  .diary-form select,
+  .diary-form textarea,
+  .routine-form input,
+  .routine-form select,
+  .routine-form textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  /* Options / buttons inside meal sections */
+  .options,
+  .option-group,
+  .meal-options,
+  .choice-group,
+  .chips,
+  .tag-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+  }
+
+  .options button,
+  .option-group button,
+  .meal-options button,
+  .choice-group button,
+  .chips button,
+  .tag-list button {
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+
+  .main,
+  main,
+  .container,
+  .content {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
