@@ -1857,86 +1857,148 @@ body.dark .bottom-nav {
     }
 
 }
-/* =========================
-   MOBILE DIARY FORM FIX
-   ========================= */
+/* =========================================
+   FINAL MOBILE TIMELINE FIX
+   ========================================= */
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
 
-  .diary-form,
-  .timeline,
-  .routine-form,
-  .form-grid {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
 
-  .diary-form *,
-  .timeline *,
-  .routine-form *,
-  .form-grid * {
-    box-sizing: border-box;
-  }
+    #app,
+    .app,
+    .main,
+    main,
+    .page,
+    .content,
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
 
-  /* Breakfast / Lunch / Snacks / Dinner cards */
-  .timeline-item,
-  .form-group,
-  .field-group,
-  .routine-item {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-  }
+    /* Timeline itself */
+    .timeline {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
 
-  /* Inputs */
-  .diary-form input,
-  .diary-form select,
-  .diary-form textarea,
-  .routine-form input,
-  .routine-form select,
-  .routine-form textarea {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-  }
+    /* Every timeline row */
+    .timeline-item,
+    .timeline-row,
+    .routine-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+    }
 
-  /* Options / buttons inside meal sections */
-  .options,
-  .option-group,
-  .meal-options,
-  .choice-group,
-  .chips,
-  .tag-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    width: 100%;
-  }
+    /* Timeline content/card */
+    .timeline-item > *,
+    .timeline-row > *,
+    .routine-item > * {
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
 
-  .options button,
-  .option-group button,
-  .meal-options button,
-  .choice-group button,
-  .chips button,
-  .tag-list button {
-    width: 100%;
-    min-width: 0;
-    white-space: normal;
-  }
+    /* Meal title + description */
+    .timeline-item h3,
+    .timeline-item h4,
+    .timeline-item p,
+    .routine-item h3,
+    .routine-item h4,
+    .routine-item p {
+        max-width: 100% !important;
+        overflow-wrap: anywhere !important;
+        word-break: normal !important;
+    }
 
-  /* Prevent horizontal overflow */
-  body {
-    overflow-x: hidden;
-  }
+    /* Inputs and textareas */
+    .timeline-item input,
+    .timeline-item select,
+    .timeline-item textarea,
+    .routine-item input,
+    .routine-item select,
+    .routine-item textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+    }
 
-  .main,
-  main,
-  .container,
-  .content {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-  }
+    /* Option buttons/chips */
+    .options,
+    .option-group,
+    .meal-options,
+    .choice-group,
+    .chips,
+    .tag-list {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        box-sizing: border-box !important;
+    }
+
+    .options button,
+    .option-group button,
+    .meal-options button,
+    .choice-group button,
+    .chips button,
+    .tag-list button {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        white-space: normal !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Prevent desktop timeline positioning from affecting mobile */
+    .timeline::before {
+        left: 16px !important;
+    }
+
+    .timeline-item::before,
+    .timeline-item::after {
+        max-width: none !important;
+    }
+
+    /* Timeline content should stay inside screen */
+    .timeline-content,
+    .timeline-card,
+    .routine-card,
+    .meal-card {
+        width: calc(100% - 32px) !important;
+        max-width: calc(100% - 32px) !important;
+        margin-left: 32px !important;
+        margin-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Don't allow fixed desktop widths */
+    [style*="width"],
+    [style*="min-width"] {
+        max-width: 100%;
+    }
 }
